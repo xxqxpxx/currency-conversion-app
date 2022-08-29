@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">paypay task</string>
+    <string name="Repos">Jake Wharton Repos</string>
+    <string name="my_favourties">My favourites</string>
+    <string name="latest">Latest</string>
+    <string name="reorder_list">Reorder list</string>
+    <string name="error_title">Ooops! Something went wrong.</string>
+    <string name="error_hint">Please refresh the page and try again</string>
+    <string name="refresh">Refresh</string>
+    <string name="apply">Apply</string>
+    <string name="reset">Reset</string>
+    <string name="search_city">search city</string>
+</resources>
