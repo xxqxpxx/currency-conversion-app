@@ -9,12 +9,9 @@ object Constants {
 
     const val BASE_URL = BuildConfig.BASE_URL
 
-
     const val CURRENCY_LIST_URL = "currencies.json?app_id=$API_KEY"
 
     const val RATES_LIST = "latest.json?app_id=$API_KEY"
-
-    const val CITY_SEARCH_URL = "search.json?key=$API_KEY"
 
     const val PREFERENCE_NAME = "pref_paypay"
 

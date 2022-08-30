@@ -2,13 +2,11 @@ package com.paypay.android.task.ui.landing
 
 import android.R
 import android.annotation.SuppressLint
-import android.graphics.Color
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
@@ -17,12 +15,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.paypay.android.task.base.BaseActivity
 import com.paypay.android.task.data.helper.ComplexPreferencesImpl
 import com.paypay.android.task.data.response.CurrencyModel
-import com.paypay.android.task.data.response.SearchCityResoponse
-import com.paypay.android.task.data.response.SearchCityResoponseItem
 import com.paypay.android.task.databinding.ActivityCurrencyLandingBinding
 import com.paypay.android.task.network.ResultModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.activity_currency_landing.*
 import kotlinx.coroutines.launch
 
 
@@ -33,14 +28,10 @@ class CurrencyLandingActivity : BaseActivity<ActivityCurrencyLandingBinding>()  
 
     private lateinit var currencyAdapter: CurrencyAdapter
 
-    private lateinit var searchItemsAdapter: SearchItemsAdapter
 
     override fun getViewBinding() = ActivityCurrencyLandingBinding.inflate(layoutInflater)
 
 
-    var cityOnClickListener = (SearchItemsAdapter.OnClickListener { item ->
-        handleCitySelection(item)
-    })
 
     private lateinit var complexPreferences: ComplexPreferencesImpl
 
@@ -85,50 +76,9 @@ class CurrencyLandingActivity : BaseActivity<ActivityCurrencyLandingBinding>()  
             }
         })
 
-        /*      binding.icSearch.setOnClickListener{
-                  handleSearchLayout(true)
-              }
-      */
+
     }
 
-
-/*
-    private fun handleSearchLayout(showLayout: Boolean) {
-        if (showLayout){
-            binding.searchLayout.searchLayout.visibility = View.VISIBLE
-
-            binding.searchLayout.imageView2.setOnClickListener {
-                handleSearchLayout(false)
-            }
-
-            binding.searchLayout.imgClose.setOnClickListener {
-                handleSearchLayout(false)
-            }
-
-            binding.searchLayout.bottomLayoutClose.setOnClickListener{
-                handleSearchLayout(false)
-            }
-
-            binding.searchLayout.etSearch.addTextChangedListener {
-
-                if (! it.isNullOrEmpty()){
-                    if (it.length >= 2){
-                        viewModel.searchForCity(it.toString().trim())
-                    }
-                }
-
-            }
-
-        }else{
-            binding.searchLayout.searchLayout.visibility = View.GONE
-
-            if (searchItemsAdapter.itemCount > 0)
-               searchItemsAdapter.submitList(emptyList())
-
-            binding.searchLayout.etSearch.text.clear()
-        }
-    }
-*/
 
 
     private fun hideErrorAndRefresh() {
@@ -157,19 +107,11 @@ class CurrencyLandingActivity : BaseActivity<ActivityCurrencyLandingBinding>()  
     }
 
 
-/*
-    private fun initCitiesList(){
-        searchItemsAdapter = SearchItemsAdapter(context = this , onClickListener = cityOnClickListener)
-        binding.searchLayout.recyclerView.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
-        binding.searchLayout.recyclerView.adapter = searchItemsAdapter
-    }
-*/
 
 
     override fun setupViewModelObservers() {
         viewModel.currencyDataObserver.observe(this, currencyDataObserver)
-        viewModel.searchTextDataObserver.observe(this, searchDataObserver)
-    }
+     }
 
 
 
@@ -190,29 +132,6 @@ class CurrencyLandingActivity : BaseActivity<ActivityCurrencyLandingBinding>()  
     }
 
 
-    private fun handleCitySelection(item: SearchCityResoponseItem) {
-   //     viewModel.fetchCurrencyList(item.name)
-        //    handleSearchLayout(false)
-
-    }
-
-
-    private val searchDataObserver = Observer<ResultModel<SearchCityResoponse>> { result ->
-        lifecycleScope.launch {
-            when (result) {
-                is ResultModel.Loading -> {
-                    handleProgress(isLoading = result.isLoading ?: false)
-                }
-                is ResultModel.Success -> {
-                    onSuccess(data = result.data)
-                }
-                is ResultModel.Failure -> {
-                    onFail()
-                }
-            }
-        }
-    }
-
     private fun handleProgress(isLoading: Boolean) {
         if (isLoading)
             binding.progressBar.visibility = View.VISIBLE
@@ -221,18 +140,9 @@ class CurrencyLandingActivity : BaseActivity<ActivityCurrencyLandingBinding>()  
 
     }
 
-    @SuppressLint("SetTextI18n")
-    private fun onSuccess(data: SearchCityResoponse) {
-        showCitiesRecycler()
-        //     initCitiesList()
 
-        searchItemsAdapter.submitList(data)
-    }
 
-    private fun showCitiesRecycler() {
-        //    binding.searchLayout.recyclerView.visibility = View.VISIBLE
-        //    binding.searchLayout.bottomLayoutClose.visibility = View.VISIBLE
-    }
+
 
     @SuppressLint("SetTextI18n")
     private fun onSuccess(data: List<CurrencyModel>) {

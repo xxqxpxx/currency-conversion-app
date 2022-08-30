@@ -9,7 +9,6 @@ import com.paypay.android.task.data.helper.ComplexPreferencesImpl
 import com.paypay.android.task.data.repo.CurrencyRepository
 import com.paypay.android.task.data.repo.LocalCurrencyRepository
 import com.paypay.android.task.data.response.CurrencyModel
-import com.paypay.android.task.data.response.SearchCityResoponse
 import com.paypay.android.task.network.ResultModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.catch
@@ -32,9 +31,6 @@ class CurrencyLandingViewModel @Inject constructor(private val repository: Curre
 
     private val _currencyDataObserver = MutableLiveData<ResultModel<List<CurrencyModel>>>()
     val currencyDataObserver: LiveData<ResultModel<List<CurrencyModel>>> = _currencyDataObserver
-
-    private val _searchTextDataObserver = MutableLiveData<ResultModel<SearchCityResoponse>>()
-    val searchTextDataObserver: LiveData<ResultModel<SearchCityResoponse>> = _searchTextDataObserver
 
     lateinit var baseCurrency: CurrencyModel
     var isFirstTime = true
@@ -121,23 +117,6 @@ class CurrencyLandingViewModel @Inject constructor(private val repository: Curre
                 }
         }
     }
-
-    fun searchForCity(city: String) {
-         _searchTextDataObserver.postValue(ResultModel.Loading(isLoading = true))
-        viewModelScope.launch {
-            repository.searchForCity(city = city)
-                .catch { exception ->
-                    Log.i(TAG, "Exception : ${exception.message}")
-                    _searchTextDataObserver.value = ResultModel.Failure(code = getStatusCode(throwable = exception))
-                    _searchTextDataObserver.postValue(ResultModel.Loading(isLoading = false))
-                }
-                .collect { response ->
-                    Log.i(TAG, "Response : $response")
-                    _searchTextDataObserver.postValue(ResultModel.Success(data = response))
-                }
-        }
-    }
-
 
     fun refresh() {
         fetchCurrencyList()

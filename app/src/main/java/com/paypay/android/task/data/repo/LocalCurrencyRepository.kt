@@ -7,7 +7,7 @@ import com.paypay.android.task.network.Constants.TIME_STAMP_PREF_NAME
 
 
 class LocalCurrencyRepository(private val complexPreferences: ComplexPreferencesImpl) {
-    private val TAG = "LocalFavouritePlanetsRepository"
+    private val TAG = "LocalCurrencyRepository"
 
     fun saveCurrencyRatesList(list: ArrayList<CurrencyModel>) {
          complexPreferences.saveArrayList(list, RATES_LIST_PREF_NAME)

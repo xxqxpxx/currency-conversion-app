@@ -17,32 +17,44 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-         android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:layout_weight="1"
-        android:layout_marginStart="@dimen/_20sdp"
-        android:layout_marginEnd="@dimen/_20sdp"
-         android:gravity="start|center_vertical"
-        android:hint="Amount"
-         android:inputType="numberDecimal"
-        android:maxLines="1"
-        android:paddingStart="10dp"
-        android:paddingEnd="10dp"
-        android:background="@drawable/bg_search_white_rounded"
-        android:textColor="@color/gray_default"
-        android:textColorHint="@color/gray_default"
-        android:textDirection="locale"
-        android:textSize="@dimen/_16ssp"
-        android:id="@+id/et_amount"
-         android:layout_marginTop="@dimen/_25sdp"
-        android:drawablePadding="@dimen/_10sdp"
-        android:text=""
-         app:layout_constraintEnd_toEndOf="parent"
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Currency Conversion"
+        android:gravity="center"
+        android:textSize="@dimen/_15ssp"
+        android:layout_marginTop="@dimen/_15sdp"
+
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
 
         />
+
+    <EditText
+        android:id="@+id/et_amount"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_weight="1"
+        android:background="@drawable/bg_search_white_rounded"
+        android:gravity="start|center_vertical"
+        android:hint="Amount"
+        android:inputType="numberDecimal"
+        android:maxLines="1"
+        android:paddingStart="@dimen/_10sdp"
+        android:paddingEnd="@dimen/_10sdp"
+        android:layout_marginStart="@dimen/_15sdp"
+        android:layout_marginEnd="@dimen/_15sdp"
+        android:text=""
+        android:textColor="@color/gray_default"
+        android:textColorHint="@color/gray_default"
+        android:textDirection="locale"
+        android:textSize="@dimen/_16ssp"
+            android:layout_marginTop="@dimen/_15sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title" />
 
     <Spinner
         android:id="@+id/spinner"
